@@ -16,7 +16,8 @@ export default function WeatherComponent(){
         try {
             const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherAPIS.apikeys}&units=metric`);
             if(!weatherRes.ok) {
-                alert("Location weather not found");
+                setResponseWeather("Endpoint not found");
+                return
             }
             return await weatherRes.json();
         }catch(error) {

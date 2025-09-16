@@ -24,7 +24,8 @@ export default function NearbyCity(){
         try {
             const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=50&appid=${weatherAPIS.apikeys}&units=metric`);
             if(!weatherRes.ok) {
-                alert("Status: 404 - Endpoint doesn't exsit");
+                setResponseWeather("Status: 404 - Endpoint doesn't exsit");
+                return;
             }
             return await weatherRes.json();
         }catch(error) {
@@ -79,7 +80,7 @@ export default function NearbyCity(){
                 </div>
             </div>
             <div className="w-full h-auto">
-                {loading ? (<div className="w-[90%] mx-auto py-4 bg-[#000000] h-full flex items-center justify-center"><Loader/></div>) : nearByCityWeather.length === 0 ? (<p className="w-[90%] mx-auto py-4 px-4 bg-[#000000] h-full flex items-center justify-center text-red-600 font-[mulish] text-sm lg:text-xl">No nearby City weather found, Ensure your devices location is on and allow permission to use your location - if all set refresh your app and give minutes to load</p>) : searchNearby.trim() && holdFiltered.length === 0 ? (<p className="w-[90%] mx-auto py-4 h-full flex items-center justify-center text-red-600 font-[mulish] text-xl bg-[#000000]">No result found for your search</p>) : (<div className="bg-[#000] w-[90%] mx-auto lg:rounded-xl overflow-hidden">
+                {loading ? (<div className="w-[90%] mx-auto py-4 bg-[#000000] h-full flex items-center justify-center"><Loader/></div>) : nearByCityWeather.length === 0 ? (<p className="w-[90%] mx-auto py-4 px-4 bg-[#000000] h-full flex items-center justify-center text-red-400 font-[mulish] text-sm lg:text-base">No nearby City weather found, Ensure your devices location is on and allow permission to use your location - if all set refresh your app and give minutes to load</p>) : searchNearby.trim() && holdFiltered.length === 0 ? (<p className="w-[90%] mx-auto py-4 h-full flex items-center justify-center text-red-600 font-[mulish] text-xl bg-[#000000]">No result found for your search</p>) : responseWeather ? (<p className="w-full h-full flex items-center justify-center text-2xl text-red-600">{responseWeather}</p>) : (<div className="bg-[#000] w-[90%] mx-auto lg:rounded-xl overflow-hidden">
                     <div className="max-w-full overflow-x-scroll scrollbar">
                         <table className="min-w-full text-left lg:text-center overflow-x-auto border-collapse">
                             <thead className="border-b border-red-400">

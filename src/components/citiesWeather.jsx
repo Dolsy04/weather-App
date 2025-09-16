@@ -18,7 +18,8 @@ export default function DefualtCities(){
         try {
             const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPIS.apikeys}&units=metric`);
             if(!weatherRes.ok) {
-                alert("Location weather not found");
+                setResponseWeather("Endpoint not found");
+                return;
             }
             return await weatherRes.json();
         }catch(error) {
@@ -80,7 +81,7 @@ export default function DefualtCities(){
                                 </div>
                             </div>
                         ))}
-                    </div>) : "Error"}
+                    </div>) : (<p className="w-full h-full flex items-center justify-center text-2xl text-red-600">{responseWeather}</p>)}
             </div>
         </section>
     </>)
